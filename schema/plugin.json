@@ -1,0 +1,8 @@
+{
+  "jupyter.lab.shortcuts": [],
+  "title": "astronbs",
+  "description": "astronbs settings.",
+  "type": "object",
+  "properties": {},
+  "additionalProperties": false
+}
