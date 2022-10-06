@@ -14,6 +14,10 @@
           {
             "command": "astronbs:reduction_template",
             "rank": 500
+          },
+          {
+            "command": "astronbs:reprojection_template",
+            "rank": 500
           }
         ],
         "rank": 50
