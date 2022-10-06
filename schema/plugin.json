@@ -18,6 +18,10 @@
           {
             "command": "astronbs:reprojection_template",
             "rank": 500
+          },
+          {
+            "command": "astronbs:light_combo_template",
+            "rank": 500
           }
         ],
         "rank": 50

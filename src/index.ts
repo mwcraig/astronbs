@@ -116,6 +116,47 @@ const plugin: JupyterFrontEndPlugin<void> = {
       icon: imageIcon,
       label: 'Reprojection Template'
     });
+
+    app.commands.addCommand('astronbs:light_combo_template', {
+      // code to run when this command is executed
+      execute: () => {
+        // const widget = new TutorialWidget();
+        // const main = new MainAreaWidget({ content: widget });
+        // const button = new ToolbarButton({icon: refreshIcon, onClick: () => widget.load_image()});
+
+        // main.title.label = 'Tutorial Widget';
+        // main.title.icon = imageIcon;
+        // main.title.caption = widget.title.label;
+
+        // // TODO: add a button to refresh image
+        // main.toolbar.addItem('Refresh', button);
+        // app.shell.add(main, 'main');
+        const reply = requestAPI<any>(
+          'light_combo_template',
+          {
+            body: JSON.stringify({'path': fileBrowser.defaultBrowser.model.path}),
+            method: 'POST'
+          }
+        );
+        console.log("I am back in open2");
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+          ///const panel = new NotebookWidgetFactory(context=model);
+        });
+
+        //
+        //
+
+        // widget.make_a_file(fileBrowser.defaultBrowser.model.path);
+      },
+      icon: imageIcon,
+      label: 'Light Combo Template'
+    });
+
     // Add item to launcher
     if (launcher) {
       launcher.add({
@@ -128,6 +169,12 @@ const plugin: JupyterFrontEndPlugin<void> = {
         command: 'astronbs:reprojection_template',
         category: 'Astro',
         rank: 10
+      });
+
+      launcher.add({
+        command: 'astronbs:light_combo_template',
+        category: 'Astro',
+        rank: 20
       });
     }
 
