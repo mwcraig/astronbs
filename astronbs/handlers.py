@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+import re
 from importlib.resources import files
 
 from jupyter_server.base.handlers import APIHandler
@@ -13,6 +14,17 @@ def hello(nb_name):
     """
     return files('astronbs').joinpath('notebooks').joinpath(nb_name).read_text()
 
+
+class NBMaker:
+    def __init__(self, path):
+        self.path = Path(path)
+
+    def __call__(self, file):
+        f = Path(file)
+        ext = f.suffix()
+        stem = f.stem()
+        matches = re.match(stem + '(\d*)' + ext)
+        pass
 
 class RouteHandler(APIHandler):
     # The following decorator should be present on all verb methods (head, get, post,
