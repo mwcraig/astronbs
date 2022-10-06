@@ -1,6 +1,6 @@
 {
   "name": "astronbs",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "JupyterLab extension to place template notebooks in t current directory",
   "keywords": [
     "jupyter",
