@@ -41,38 +41,25 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:reduction_template', {
       // code to run when this command is executed
       execute: () => {
-        // const widget = new TutorialWidget();
-        // const main = new MainAreaWidget({ content: widget });
-        // const button = new ToolbarButton({icon: refreshIcon, onClick: () => widget.load_image()});
-
-        // main.title.label = 'Tutorial Widget';
-        // main.title.icon = imageIcon;
-        // main.title.caption = widget.title.label;
-
-        // // TODO: add a button to refresh image
-        // main.toolbar.addItem('Refresh', button);
-        // app.shell.add(main, 'main');
         const reply = requestAPI<any>(
           'reduction_template', 
           {
-            body: JSON.stringify({'path': fileBrowser.defaultBrowser.model.path}), 
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'astronbs.notebooks',
+                        'nb_name': 'reduction_template.ipynb'
+                    }),
             method: 'POST'
           }
         );
-        console.log("I am back in open2");
         console.log(reply)
         reply.then(data => {
           console.log(data);
           if (docManager) {
             docManager.open(data['path']);
           }
-          ///const panel = new NotebookWidgetFactory(context=model);
         });
-
-        //
-        //
-
-        // widget.make_a_file(fileBrowser.defaultBrowser.model.path);
       },
       icon: imageIcon,
       label: 'Reduction Template'
@@ -80,38 +67,20 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:reprojection_template', {
       // code to run when this command is executed
       execute: () => {
-        // const widget = new TutorialWidget();
-        // const main = new MainAreaWidget({ content: widget });
-        // const button = new ToolbarButton({icon: refreshIcon, onClick: () => widget.load_image()});
-
-        // main.title.label = 'Tutorial Widget';
-        // main.title.icon = imageIcon;
-        // main.title.caption = widget.title.label;
-
-        // // TODO: add a button to refresh image
-        // main.toolbar.addItem('Refresh', button);
-        // app.shell.add(main, 'main');
-        const reply = requestAPI<any>(
+       const reply = requestAPI<any>(
           'reprojection_template', 
           {
             body: JSON.stringify({'path': fileBrowser.defaultBrowser.model.path}), 
             method: 'POST'
           }
         );
-        console.log("I am back in open2");
         console.log(reply)
         reply.then(data => {
           console.log(data);
           if (docManager) {
             docManager.open(data['path']);
           }
-          ///const panel = new NotebookWidgetFactory(context=model);
         });
-
-        //
-        //
-
-        // widget.make_a_file(fileBrowser.defaultBrowser.model.path);
       },
       icon: imageIcon,
       label: 'Reprojection Template'
@@ -120,17 +89,6 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:light_combo_template', {
       // code to run when this command is executed
       execute: () => {
-        // const widget = new TutorialWidget();
-        // const main = new MainAreaWidget({ content: widget });
-        // const button = new ToolbarButton({icon: refreshIcon, onClick: () => widget.load_image()});
-
-        // main.title.label = 'Tutorial Widget';
-        // main.title.icon = imageIcon;
-        // main.title.caption = widget.title.label;
-
-        // // TODO: add a button to refresh image
-        // main.toolbar.addItem('Refresh', button);
-        // app.shell.add(main, 'main');
         const reply = requestAPI<any>(
           'light_combo_template',
           {
@@ -145,16 +103,63 @@ const plugin: JupyterFrontEndPlugin<void> = {
           if (docManager) {
             docManager.open(data['path']);
           }
-          ///const panel = new NotebookWidgetFactory(context=model);
         });
-
-        //
-        //
-
-        // widget.make_a_file(fileBrowser.defaultBrowser.model.path);
       },
       icon: imageIcon,
       label: 'Light Combo Template'
+    });
+    app.commands.addCommand('astronbs:01_seeing_profile', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>(
+          'nb_make',
+          {
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'stellarphot.notebooks.photometry',
+                        'nb_name': '01-viewer-seeing-template.ipynb'
+                    }),
+            method: 'POST'
+          }
+        );
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: '01 Seeing Profile'
+    });
+
+    app.commands.addCommand('astronbs:02_comp_stars', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>(
+          'nb_make',
+          {
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'stellarphot.notebooks.photometry',
+                        'nb_name': '02-comp-star-plotter-template.ipynb'
+                    }),
+            method: 'POST'
+          }
+        );
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: '02 Comparison Stars'
     });
 
     // Add item to launcher
@@ -175,6 +180,16 @@ const plugin: JupyterFrontEndPlugin<void> = {
         command: 'astronbs:light_combo_template',
         category: 'Astro',
         rank: 20
+      });
+      launcher.add({
+        command: 'astronbs:01_seeing_profile',
+        category: 'Photometry',
+        rank: 0
+      });
+      launcher.add({
+        command: 'astronbs:02_comp_stars',
+        category: 'Photometry',
+        rank: 0
       });
     }
 
