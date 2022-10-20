@@ -162,6 +162,32 @@ const plugin: JupyterFrontEndPlugin<void> = {
       label: '02 Comparison Stars'
     });
 
+    app.commands.addCommand('astronbs:03_do_photometry', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>(
+          'nb_make',
+          {
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'stellarphot.notebooks.photometry',
+                        'nb_name': '03-photometry-template.ipynb'
+                    }),
+            method: 'POST'
+          }
+        );
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: '03 Do photometry'
+    });
     // Add item to launcher
     if (launcher) {
       launcher.add({
@@ -188,6 +214,11 @@ const plugin: JupyterFrontEndPlugin<void> = {
       });
       launcher.add({
         command: 'astronbs:02_comp_stars',
+        category: 'Photometry',
+        rank: 0
+      });      
+      launcher.add({
+        command: 'astronbs:03_do_photometry',
         category: 'Photometry',
         rank: 0
       });
