@@ -19,7 +19,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
   autoStart: true,
   optional: [ISettingRegistry, ILauncher, IFileBrowserFactory, IDocumentManager],
   activate: (
-    app: JupyterFrontEnd, 
+    app: JupyterFrontEnd,
     settingRegistry: ISettingRegistry | null,
     launcher: ILauncher | null,
     fileBrowser: IFileBrowserFactory,
@@ -42,7 +42,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
       // code to run when this command is executed
       execute: () => {
         const reply = requestAPI<any>(
-          'reduction_template', 
+          'reduction_template',
           {
             body: JSON.stringify(
                       {
@@ -68,9 +68,9 @@ const plugin: JupyterFrontEndPlugin<void> = {
       // code to run when this command is executed
       execute: () => {
        const reply = requestAPI<any>(
-          'reprojection_template', 
+          'reprojection_template',
           {
-            body: JSON.stringify({'path': fileBrowser.defaultBrowser.model.path}), 
+            body: JSON.stringify({'path': fileBrowser.defaultBrowser.model.path}),
             method: 'POST'
           }
         );
@@ -188,6 +188,34 @@ const plugin: JupyterFrontEndPlugin<void> = {
       icon: imageIcon,
       label: '03 Do photometry'
     });
+
+    app.commands.addCommand('astronbs:transform_pared_back', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>(
+          'nb_make',
+          {
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'stellarphot.notebooks.photometry',
+                        'nb_name': 'transform-pared-back.ipynb'
+                    }),
+            method: 'POST'
+          }
+        );
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: '03 Do photometry'
+    });
+
     // Add item to launcher
     if (launcher) {
       launcher.add({
@@ -195,7 +223,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
         category: 'Astro',
         rank: 0
       });
-      
+
       launcher.add({
         command: 'astronbs:reprojection_template',
         category: 'Astro',
@@ -216,13 +244,19 @@ const plugin: JupyterFrontEndPlugin<void> = {
         command: 'astronbs:02_comp_stars',
         category: 'Photometry',
         rank: 0
-      });      
+      });
       launcher.add({
         command: 'astronbs:03_do_photometry',
         category: 'Photometry',
         rank: 0
       });
+      launcher.add({
+        command: 'astronbs:transform_pared_back',
+        category: 'Photometry',
+        rank: 0
+      });
     }
+
 
     requestAPI<any>('get_example')
       .then(data => {
