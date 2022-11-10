@@ -213,7 +213,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
         });
       },
       icon: imageIcon,
-      label: '03 Do photometry'
+      label: '04 Transform photometry'
     });
 
     // Add item to launcher
