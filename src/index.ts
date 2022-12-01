@@ -216,6 +216,60 @@ const plugin: JupyterFrontEndPlugin<void> = {
       label: '04 Transform photometry'
     });
 
+    app.commands.addCommand('astronbs:05_relative_flux', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>(
+          'nb_make',
+          {
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'stellarphot.notebooks.photometry',
+                        'nb_name': '05-relative-flux-calculation-template.ipynb'
+                    }),
+            method: 'POST'
+          }
+        );
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: '05 Relative flux'
+    });
+
+    app.commands.addCommand('astronbs:06_transit_fitting', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>(
+          'nb_make',
+          {
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'stellarphot.notebooks.photometry',
+                        'nb_name': '06-transit-fit-template.ipynb'
+                    }),
+            method: 'POST'
+          }
+        );
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: '06 Transit fitting'
+    });
+
     // Add item to launcher
     if (launcher) {
       launcher.add({
@@ -252,6 +306,16 @@ const plugin: JupyterFrontEndPlugin<void> = {
       });
       launcher.add({
         command: 'astronbs:transform_pared_back',
+        category: 'Photometry',
+        rank: 0
+      });
+      launcher.add({
+        command: 'astronbs:05_relative_flux',
+        category: 'Photometry',
+        rank: 0
+      });
+      launcher.add({
+        command: 'astronbs:06_transit_fitting',
         category: 'Photometry',
         rank: 0
       });
