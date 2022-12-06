@@ -347,7 +347,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
         rank: 0
       });
       launcher.add({
-        command: 'astronbs:07_transit_fitting_exotoic',
+        command: 'astronbs:07_transit_fitting_exotic',
         category: 'Photometry',
         rank: 0
       });
