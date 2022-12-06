@@ -270,6 +270,33 @@ const plugin: JupyterFrontEndPlugin<void> = {
       label: '06 Transit fitting'
     });
 
+    app.commands.addCommand('astronbs:07_transit_fitting_exotic', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>(
+          'nb_make',
+          {
+            body: JSON.stringify(
+                      {
+                        'path': fileBrowser.defaultBrowser.model.path,
+                        'package_path': 'stellarphot.notebooks.photometry',
+                        'nb_name': '07-transit-fit-with-exotic.ipynb'
+                    }),
+            method: 'POST'
+          }
+        );
+        console.log(reply)
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: '07 Transit fitting EXOTIC'
+    });
+
     // Add item to launcher
     if (launcher) {
       launcher.add({
@@ -316,6 +343,11 @@ const plugin: JupyterFrontEndPlugin<void> = {
       });
       launcher.add({
         command: 'astronbs:06_transit_fitting',
+        category: 'Photometry',
+        rank: 0
+      });
+      launcher.add({
+        command: 'astronbs:07_transit_fitting_exotoic',
         category: 'Photometry',
         rank: 0
       });
