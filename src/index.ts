@@ -17,7 +17,12 @@ import { requestAPI } from './handler';
 const plugin: JupyterFrontEndPlugin<void> = {
   id: 'astronbs:plugin',
   autoStart: true,
-  optional: [ISettingRegistry, ILauncher, IFileBrowserFactory, IDocumentManager],
+  optional: [
+    ISettingRegistry,
+    ILauncher,
+    IFileBrowserFactory,
+    IDocumentManager
+  ],
   activate: (
     app: JupyterFrontEnd,
     settingRegistry: ISettingRegistry | null,
@@ -41,19 +46,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:reduction_template', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'reduction_template',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'astronbs.notebooks',
-                        'nb_name': 'reduction_template.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('reduction_template', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'astronbs.notebooks',
+            nb_name: 'reduction_template.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -67,14 +68,11 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:reprojection_template', {
       // code to run when this command is executed
       execute: () => {
-       const reply = requestAPI<any>(
-          'reprojection_template',
-          {
-            body: JSON.stringify({'path': fileBrowser.defaultBrowser.model.path}),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('reprojection_template', {
+          body: JSON.stringify({ path: fileBrowser.defaultBrowser.model.path }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -89,15 +87,12 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:light_combo_template', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'light_combo_template',
-          {
-            body: JSON.stringify({'path': fileBrowser.defaultBrowser.model.path}),
-            method: 'POST'
-          }
-        );
-        console.log("I am back in open2");
-        console.log(reply)
+        const reply = requestAPI<any>('light_combo_template', {
+          body: JSON.stringify({ path: fileBrowser.defaultBrowser.model.path }),
+          method: 'POST'
+        });
+        console.log('I am back in open2');
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -111,19 +106,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:01_seeing_profile', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'nb_make',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'stellarphot.notebooks.photometry',
-                        'nb_name': '01-viewer-seeing-template.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('nb_make', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'stellarphot.notebooks.photometry',
+            nb_name: '01-viewer-seeing-template.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -138,19 +129,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:02_comp_stars', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'nb_make',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'stellarphot.notebooks.photometry',
-                        'nb_name': '02-comp-star-plotter-template.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('nb_make', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'stellarphot.notebooks.photometry',
+            nb_name: '02-comp-star-plotter-template.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -165,19 +152,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:03_do_photometry', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'nb_make',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'stellarphot.notebooks.photometry',
-                        'nb_name': '03-photometry-template.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('nb_make', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'stellarphot.notebooks.photometry',
+            nb_name: '03-photometry-template.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -192,19 +175,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:transform_pared_back', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'nb_make',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'stellarphot.notebooks.photometry',
-                        'nb_name': 'transform-pared-back.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('nb_make', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'stellarphot.notebooks.photometry',
+            nb_name: 'transform-pared-back.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -219,19 +198,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:05_relative_flux', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'nb_make',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'stellarphot.notebooks.photometry',
-                        'nb_name': '05-relative-flux-calculation-template.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('nb_make', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'stellarphot.notebooks.photometry',
+            nb_name: '05-relative-flux-calculation-template.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -246,19 +221,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:06_transit_fitting', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'nb_make',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'stellarphot.notebooks.photometry',
-                        'nb_name': '06-transit-fit-template.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('nb_make', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'stellarphot.notebooks.photometry',
+            nb_name: '06-transit-fit-template.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -273,19 +244,15 @@ const plugin: JupyterFrontEndPlugin<void> = {
     app.commands.addCommand('astronbs:07_transit_fitting_exotic', {
       // code to run when this command is executed
       execute: () => {
-        const reply = requestAPI<any>(
-          'nb_make',
-          {
-            body: JSON.stringify(
-                      {
-                        'path': fileBrowser.defaultBrowser.model.path,
-                        'package_path': 'stellarphot.notebooks.photometry',
-                        'nb_name': '07-transit-fit-with-exotic.ipynb'
-                    }),
-            method: 'POST'
-          }
-        );
-        console.log(reply)
+        const reply = requestAPI<any>('nb_make', {
+          body: JSON.stringify({
+            path: fileBrowser.defaultBrowser.model.path,
+            package_path: 'stellarphot.notebooks.photometry',
+            nb_name: '07-transit-fit-with-exotic.ipynb'
+          }),
+          method: 'POST'
+        });
+        console.log(reply);
         reply.then(data => {
           console.log(data);
           if (docManager) {
@@ -352,7 +319,6 @@ const plugin: JupyterFrontEndPlugin<void> = {
         rank: 0
       });
     }
-
 
     requestAPI<any>('get_example')
       .then(data => {
