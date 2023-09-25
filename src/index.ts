@@ -103,6 +103,87 @@ const plugin: JupyterFrontEndPlugin<void> = {
       icon: imageIcon,
       label: 'Light Combo Template'
     });
+
+    app.commands.addCommand('astronbs:folder_viewer_template', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>('folder_viewer_template', {
+          body: JSON.stringify({ path: fileBrowser.defaultBrowser.model.path }),
+          method: 'POST'
+        });
+        console.log('I am back in open15');
+        console.log(reply);
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: 'Folder Image Viewer'
+    });
+
+    app.commands.addCommand('astronbs:interactive_image_viewer', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>('interactive_image_viewer', {
+          body: JSON.stringify({ path: fileBrowser.defaultBrowser.model.path }),
+          method: 'POST'
+        });
+        console.log('I am back in open11');
+        console.log(reply);
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: 'Interactive Image Viewer'
+    });
+
+    app.commands.addCommand('astronbs:quick_color_template', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>('quick_color_template', {
+          body: JSON.stringify({ path: fileBrowser.defaultBrowser.model.path }),
+          method: 'POST'
+        });
+        console.log('I am back in open11');
+        console.log(reply);
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: 'Quick Color Image'
+    });
+
+    app.commands.addCommand('astronbs:color_mixer_template', {
+      // code to run when this command is executed
+      execute: () => {
+        const reply = requestAPI<any>('color_mixer_template', {
+          body: JSON.stringify({ path: fileBrowser.defaultBrowser.model.path }),
+          method: 'POST'
+        });
+        console.log('I am back in open11');
+        console.log(reply);
+        reply.then(data => {
+          console.log(data);
+          if (docManager) {
+            docManager.open(data['path']);
+          }
+        });
+      },
+      icon: imageIcon,
+      label: 'Color Mixer'
+    });
+
     app.commands.addCommand('astronbs:01_seeing_profile', {
       // code to run when this command is executed
       execute: () => {
@@ -283,6 +364,31 @@ const plugin: JupyterFrontEndPlugin<void> = {
         category: 'Astro',
         rank: 20
       });
+
+      launcher.add({
+        command: 'astronbs:folder_viewer_template',
+        category: 'Astro',
+        rank: 30
+      });
+
+      launcher.add({
+        command: 'astronbs:interactive_image_viewer',
+        category: 'Astro',
+        rank: 40
+      });
+
+      launcher.add({
+        command: 'astronbs:quick_color_template',
+        category: 'Astro',
+        rank: 50
+      });
+
+      launcher.add({
+        command: 'astronbs:color_mixer_template',
+        category: 'Astro',
+        rank: 60
+      });
+
       launcher.add({
         command: 'astronbs:01_seeing_profile',
         category: 'Photometry',

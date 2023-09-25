@@ -115,6 +115,114 @@ class RouteHandler3(APIHandler):
         self.finish(json.dumps(response))
 
 
+class RouteHandler10(APIHandler):
+    # The following decorator should be present on all verb methods (head, get, post,
+    # patch, put, delete, options) to ensure only authorized user can request the
+    # Jupyter server
+    @tornado.web.authenticated
+    def get(self):
+        p = Path('.')
+        print(p.absolute())
+        self.finish(json.dumps({
+            "data": "This is /wooty-woot/get_example endpoint!"
+        }))
+
+    @tornado.web.authenticated
+    def post(self):
+        input_data = self.get_json_body()
+        p = Path('.')
+        nb_name = 'folder-viewer-template.ipynb'
+        nb_content = hello(nb_name)
+
+        (p / input_data['path'] / nb_name).write_text(nb_content)
+        response = {
+            'path': str(Path(input_data['path']) / nb_name),
+            'content': ''
+        }
+        self.finish(json.dumps(response))
+
+
+class RouteHandler11(APIHandler):
+    # The following decorator should be present on all verb methods (head, get, post,
+    # patch, put, delete, options) to ensure only authorized user can request the
+    # Jupyter server
+    @tornado.web.authenticated
+    def get(self):
+        p = Path('.')
+        print(p.absolute())
+        self.finish(json.dumps({
+            "data": "This is /wooty-woot/get_example endpoint!"
+        }))
+
+    @tornado.web.authenticated
+    def post(self):
+        input_data = self.get_json_body()
+        p = Path('.')
+        nb_name = 'interactive-image-viewer.ipynb'
+        nb_content = hello(nb_name)
+
+        (p / input_data['path'] / nb_name).write_text(nb_content)
+        response = {
+            'path': str(Path(input_data['path']) / nb_name),
+            'content': ''
+        }
+        self.finish(json.dumps(response))
+
+
+class RouteHandler12(APIHandler):
+    # The following decorator should be present on all verb methods (head, get, post,
+    # patch, put, delete, options) to ensure only authorized user can request the
+    # Jupyter server
+    @tornado.web.authenticated
+    def get(self):
+        p = Path('.')
+        print(p.absolute())
+        self.finish(json.dumps({
+            "data": "This is /wooty-woot/get_example endpoint!"
+        }))
+
+    @tornado.web.authenticated
+    def post(self):
+        input_data = self.get_json_body()
+        p = Path('.')
+        nb_name = 'quick-color-template.ipynb'
+        nb_content = hello(nb_name)
+
+        (p / input_data['path'] / nb_name).write_text(nb_content)
+        response = {
+            'path': str(Path(input_data['path']) / nb_name),
+            'content': ''
+        }
+        self.finish(json.dumps(response))
+
+
+class RouteHandler13(APIHandler):
+    # The following decorator should be present on all verb methods (head, get, post,
+    # patch, put, delete, options) to ensure only authorized user can request the
+    # Jupyter server
+    @tornado.web.authenticated
+    def get(self):
+        p = Path('.')
+        print(p.absolute())
+        self.finish(json.dumps({
+            "data": "This is /wooty-woot/get_example endpoint!"
+        }))
+
+    @tornado.web.authenticated
+    def post(self):
+        input_data = self.get_json_body()
+        p = Path('.')
+        nb_name = 'color-mixer-template.ipynb'
+        nb_content = hello(nb_name)
+
+        (p / input_data['path'] / nb_name).write_text(nb_content)
+        response = {
+            'path': str(Path(input_data['path']) / nb_name),
+            'content': ''
+        }
+        self.finish(json.dumps(response))
+
+
 class RouteHandler4(APIHandler):
     # The following decorator should be present on all verb methods (head, get, post,
     # patch, put, delete, options) to ensure only authorized user can request the
@@ -151,10 +259,19 @@ def setup_handlers(web_app):
     route_pattern2 = url_path_join(base_url, "astronbs", "reprojection_template")
     route_pattern3 = url_path_join(base_url, "astronbs", "light_combo_template")
     route_pattern4 = url_path_join(base_url, "astronbs", "nb_make")
+    route_pattern10 = url_path_join(base_url, "astronbs", "folder_viewer_template")
+    route_pattern11 = url_path_join(base_url, "astronbs", "interactive_image_viewer")
+    route_pattern12 = url_path_join(base_url, "astronbs", "quick_color_template")
+    route_pattern13 = url_path_join(base_url, "astronbs", "color_mixer_template")
+
     handlers = [
         (route_pattern, RouteHandler),
         (route_pattern2, RouteHandler2),
         (route_pattern3, RouteHandler3),
         (route_pattern4, RouteHandler4),
+        (route_pattern10, RouteHandler10),
+        (route_pattern11, RouteHandler11),
+        (route_pattern12, RouteHandler12),
+        (route_pattern13, RouteHandler13),
     ]
     web_app.add_handlers(host_pattern, handlers)
