@@ -253,14 +253,14 @@ const plugin: JupyterFrontEndPlugin<void> = {
       label: '03 Do photometry'
     });
 
-    app.commands.addCommand('astronbs:transform_pared_back', {
+    app.commands.addCommand('astronbs:04_transform_pared_back', {
       // code to run when this command is executed
       execute: () => {
         const reply = requestAPI<any>('nb_make', {
           body: JSON.stringify({
             path: fileBrowser.defaultBrowser.model.path,
             package_path: 'stellarphot.notebooks.photometry',
-            nb_name: 'transform-pared-back.ipynb'
+            nb_name: '04-transform-pared-back.ipynb'
           }),
           method: 'POST'
         });
@@ -405,7 +405,7 @@ const plugin: JupyterFrontEndPlugin<void> = {
         rank: 0
       });
       launcher.add({
-        command: 'astronbs:transform_pared_back',
+        command: 'astronbs:04_transform_pared_back',
         category: 'Photometry',
         rank: 0
       });
